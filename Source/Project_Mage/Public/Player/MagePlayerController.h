@@ -4,24 +4,24 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
-#include "RPGPlayerController.generated.h"
+#include "MagePlayerController.generated.h"
 
 // Forward Declarations
 class UInputMappingContext;
 
 // 플레이어 기본 입력 로직을 처리하는 클래스
-UCLASS()
-class PROJECT_MAGE_API ARPGPlayerController : public APlayerController
+UCLASS(Blueprintable)
+class PROJECT_MAGE_API AMagePlayerController : public APlayerController
 {
 	GENERATED_BODY()
 
 public:
-	ARPGPlayerController();
+	AMagePlayerController();
 
 protected:
 	void BeginPlay() override;
 
 private:
 	UPROPERTY(EditAnywhere, Category = "Input")
-	TObjectPtr<UInputMappingContext> RPGContext;
+	TObjectPtr<UInputMappingContext> MageContext;
 };

@@ -4,14 +4,16 @@
 
 #include "CoreMinimal.h"
 #include "Character/CharacterBase.h"
-#include "RPGCharacter.generated.h"
+#include "MageCharacter.generated.h"
 
 /**
  * 
  */
-UCLASS()
-class PROJECT_MAGE_API ARPGCharacter : public ACharacterBase
+UCLASS(Blueprintable)
+class PROJECT_MAGE_API AMageCharacter : public ACharacterBase
 {
 	GENERATED_BODY()
 	
+public:
+	AMageCharacter();
 };

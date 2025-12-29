@@ -1,10 +1,10 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "Player/RPGPlayerController.h"
+#include "Player/MagePlayerController.h"
 #include "EnhancedInputSubsystems.h"
 
-ARPGPlayerController::ARPGPlayerController()
+AMagePlayerController::AMagePlayerController()
 {
 #pragma region Note: bReplicates 
 	// 해당 컨트롤러는 네트워크에서 복제 대상임을 명시한다.
@@ -19,11 +19,11 @@ ARPGPlayerController::ARPGPlayerController()
 	bReplicates = true;
 }
 
-void ARPGPlayerController::BeginPlay()
+void AMagePlayerController::BeginPlay()
 {
 	Super::BeginPlay();
 
-	check(RPGContext); // check -> assert
+	check(MageContext); // check -> assert
 
 	// Subsystem 연결
 #pragma region Note: Subsystem
@@ -40,7 +40,7 @@ void ARPGPlayerController::BeginPlay()
 	UEnhancedInputLocalPlayerSubsystem* Subsystem =
 		ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer());
 	check(Subsystem);
-	Subsystem->AddMappingContext(RPGContext, 0);
+	Subsystem->AddMappingContext(MageContext, 0);
 
 
 	// Mouse Cursor에 대한 InputMode 설정

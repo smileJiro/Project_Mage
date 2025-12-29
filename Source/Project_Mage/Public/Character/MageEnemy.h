@@ -4,13 +4,17 @@
 
 #include "CoreMinimal.h"
 #include "Character/CharacterBase.h"
-#include "RPGEnemy.generated.h"
+#include "MageEnemy.generated.h"
 
 /**
  * 
  */
-UCLASS()
-class PROJECT_MAGE_API ARPGEnemy : public ACharacterBase
+UCLASS(Blueprintable)
+class PROJECT_MAGE_API AMageEnemy : public ACharacterBase
 {
 	GENERATED_BODY()
+
+public:
+	AMageEnemy();
+
 };
