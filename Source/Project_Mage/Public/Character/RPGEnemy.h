@@ -13,5 +13,4 @@ UCLASS()
 class PROJECT_MAGE_API ARPGEnemy : public ACharacterBase
 {
 	GENERATED_BODY()
-	
 };
