@@ -3,6 +3,7 @@
 
 #include "Player/MagePlayerController.h"
 #include "EnhancedInputSubsystems.h"
+#include "EnhancedInputComponent.h"
 
 AMagePlayerController::AMagePlayerController()
 {
@@ -50,4 +51,31 @@ void AMagePlayerController::BeginPlay()
 	InputmodeData.SetLockMouseToViewportBehavior(EMouseLockMode::DoNotLock);
 	InputmodeData.SetHideCursorDuringCapture(false);
 	SetInputMode(InputmodeData);
+}
+
+void AMagePlayerController::SetupInputComponent()
+{
+	Super::SetupInputComponent();
+
+	UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(InputComponent);
+	EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AMagePlayerController::Move);
+}
+
+void AMagePlayerController::Move(const FInputActionValue& InputActionValue)
+{
+	const FRotator Rotation = GetControlRotation();
+	const FRotator YawRotation(0.f, Rotation.Yaw, 0.f);
+
+	const FRotationMatrix RotationMatrix = FRotationMatrix(YawRotation);
+	const FVector ForwardDirection = RotationMatrix.GetUnitAxis(EAxis::X);
+	const FVector RightDirection = RotationMatrix.GetUnitAxis(EAxis::Y);
+
+	// x,y Æò¸é»ó ÁÂÇ¥
+	const FVector2D InputAxisVector = InputActionValue.Get<FVector2D>();
+
+	if (APawn* ControlledPawn = GetPawn<APawn>())
+	{
+		ControlledPawn->AddMovementInput(ForwardDirection, InputAxisVector.Y);
+		ControlledPawn->AddMovementInput(RightDirection, InputAxisVector.X);
+	}
 }
